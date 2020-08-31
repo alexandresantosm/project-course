@@ -1,38 +1,61 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.courses-list {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  flex-wrap: wrap;
+}
+
+.course {
+  position: relative;
+  width: 150px;
+  border: 1px solid #DDD;
+  list-style-type: none;
+  margin: 5px;
+  padding: 5px;
+  border-radius: 5px;
+  transition: all .5s ease;
+  cursor: pointer;
+  background-color: #F6F6F6;
+}
+
+.course:hover {
+  background-color: #FFF;
+  transform: scale(1.1);
+  box-shadow: 0 0 25px rgba(0, 0, 0, .2);
+}
+
+.course button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  border: none;
+  background-color: #AC3940;
   color: white;
+  z-index: 2;
 }
 
-.App-link {
-  color: #61dafb;
+.course button:hover {
+  background-color: #D2434A;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.course img {
+  display: block;
+  width: calc(100% -20px);
+  max-height: 150px;
+  margin: 10px auto;
+}
+
+.course div:first-child {
+  position: relative;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.course div:first-child::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  width: calc(100% + 10px);
+  height: calc(100% + 10px);
+  background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, .2));
 }
