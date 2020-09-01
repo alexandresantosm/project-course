@@ -1,29 +1,31 @@
 import React, { Component } from 'react';
 
 import Course from './components/Course';
+import NewCourseForm from './components/NewCourseForm';
 
 import './App.css';
 
 class App extends Component {
+
+  static defaultProps = {
+    onSubmit: () => {}
+  }
+
   constructor(props) {
     super(props);
     this.state = {
-      courses: [
-        {
-          id: 1,
-          name: 'React',
-          category: 'JavaScript',
-          image: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii0xMS41IC0xMC4yMzE3NCAyMyAyMC40NjM0OCI+CiAgPHRpdGxlPlJlYWN0IExvZ288L3RpdGxlPgogIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyLjA1IiBmaWxsPSIjNjFkYWZiIi8+CiAgPGcgc3Ryb2tlPSIjNjFkYWZiIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIi8+CiAgICA8ZWxsaXBzZSByeD0iMTEiIHJ5PSI0LjIiIHRyYW5zZm9ybT0icm90YXRlKDYwKSIvPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjApIi8+CiAgPC9nPgo8L3N2Zz4K'
-        },
-        {
-          id: 2,
-          name: 'Angular',
-          category: 'JavaScript',
-          image: 'https://angular.io/assets/images/logos/angular/angular.png'
-        }
-      ]
+      courses: []
     };
+    this.addCourse = this.addCourse.bind(this);
     this.removeCourse = this.removeCourse.bind(this);
+  }
+
+  addCourse(course) {
+    const { courses } = this.state;
+    const newCourse = Object.assign({}, course, {id: (Date.now())}); //Adição de um campo id
+    courses.push(newCourse);
+
+    this.setState({courses});
   }
 
   removeCourse(courseId) {
@@ -39,11 +41,15 @@ class App extends Component {
 
     return (
       <div className="App">
+
+        <NewCourseForm onSubmit={this.addCourse}/>
+
         <ul className="courses-list">
           {
             courses.map(course => <Course key={course.id} course={course} onRemove={this.removeCourse} />)
           }
         </ul>
+
       </div>
     );
   } 
